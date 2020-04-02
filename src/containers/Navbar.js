@@ -1,13 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Navbar, Nav } from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
+import Session from '../utils/Session';
 // import "../App.css";
 
-const Navibar = ({appProps}) => {
+const Navibar = ({appProps, history}) => {
   const { isAuthenticated, userHasAuthenticated } = appProps;
   function handleLogout() {
     userHasAuthenticated(false);
+    Session.cleanSession();
+    history.push("/login");
   }
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -34,4 +37,4 @@ const Navibar = ({appProps}) => {
   );
 }
 
-export default Navibar;
+export default withRouter(Navibar);
