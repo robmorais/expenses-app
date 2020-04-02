@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 import Routes from "./Routes";
 import Navbar from './containers/Navbar'
+import Session from './utils/Session';
 // import Login from './components/Login'
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
+
+  useEffect(() => {
+    onLoad();
+  }, []);
+  
+  function onLoad() {
+    userHasAuthenticated(Session.startSession())    
+    // TODO - add headers to axios
+    // TODO - redirect to login / main page
+  }
+    
   return (
     // <div className="App">
     <Router>
