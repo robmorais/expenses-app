@@ -1,0 +1,38 @@
+.transactions h4 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  overflow: hidden;
+  /* line-height: 1.5; */
+  margin-bottom: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.transactions p {
+  color: #666;
+}
+
+.list-group-item {
+  padding: .5rem 1.25rem;
+}
+
+.list-group-item:hover {
+  filter: brightness(80%);
+}
+
+.list-group-item+.list-group-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem 1.25rem;
+}
+
+.transactions .description {
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.transactions .price {
+  margin-bottom: 0;
+}
