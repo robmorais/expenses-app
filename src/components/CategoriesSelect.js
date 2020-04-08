@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import "./CategoriesSelect.css"; 
+import API from '../utils/API';
 
-const CategoriesSelect = (props) => {
+const CategoriesSelect = ({title, value, onChange}) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     async function onLoad() {
       try {
         const resultData = await loadCategories();
-        setCategories([{ id: "", name: "Select the category"}].concat(resultData));
-        console.log(resultData);
-        //setTransactions(resultData.data.transactions);
+        console.log(resultData.data.categories);
+        setCategories([{ id: "", name: "Select the category"}].concat(resultData.data.categories));
+        console.log(resultData.categories);
       } catch (e) {
         console.log(e);
       }
@@ -22,13 +23,14 @@ const CategoriesSelect = (props) => {
   }, []);
 
   const loadCategories = () => {
-    return [{id: 1, name: "eating out"}, {id:2, name: "supermarket"} ,{id: 3, name: "clothes"}, {id:4, name: "bills"}];
+    
+    return API.get('categories');
   }
 
   return (
-    <Form.Group controlId="exampleForm.ControlSelect1" className="">
-      <Form.Label>{props.title}</Form.Label>
-      <Form.Control as="select">
+    <Form.Group controlId="category">
+      <Form.Label>{title}</Form.Label>
+      <Form.Control as="select" value={value} onChange={onChange}>
         {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
       </Form.Control>
     </Form.Group>
