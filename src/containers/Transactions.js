@@ -53,27 +53,31 @@ export default function Home(props) {
 
   function renderTransactionsList(transactions) {
     return [{}].concat(transactions).map((transaction, i) =>
-    i !== 0 ? (
-      <LinkContainer key={transaction.id} to={`/transactions/${transaction.id}`}>
-        <ListGroupItem>
+      i !== 0 ? (
+        // <LinkContainer key={transaction.id} to={`/transactions/${transaction.id}`}>
+        <ListGroupItem key={transaction.id}>
             
           <div className="details">
+            <p className="category">{transaction.category.name}</p>
             <p className="description">{transaction.description}</p>
-            <p className="price">{formatPrice(transaction.price)}</p>
           </div>
-          <span className="date">{transaction["paid_on"]}</span>
+          <div className="details">
+            <p className="price">{formatPrice(transaction.price)}</p>
+            <p className="date">{transaction["paid_on"]}</p>  
+          </div>
+          
         </ListGroupItem>
-      </LinkContainer>
-    ) : (
-      <LinkContainer key="new" to="/transaction/new">
-        <ListGroupItem>
-          <h4>
-            <b>{"\uFF0B"}</b> Create a new transaction
-          </h4>
-        </ListGroupItem>
-      </LinkContainer>
-    )
-  );
+        // </LinkContainer>
+      ) : (
+        <LinkContainer key="new" to="/transaction/new">
+          <ListGroupItem>
+            <h4>
+              <b>{"\uFF0B"}</b> Create a new transaction
+            </h4>
+          </ListGroupItem>
+        </LinkContainer>
+      )
+    );
   }
 
   return (

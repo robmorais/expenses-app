@@ -28,11 +28,23 @@
 }
 
 .transactions .description {
-  margin-bottom: 5px;
+  /* font-weight: bold; */
+  text-transform: capitalize;
+}
+
+.transactions .category {
   font-weight: bold;
   text-transform: capitalize;
 }
 
-.transactions .price {
+.transactions .date {
+  font-size: 14px;
+}
+
+.transactions .details p {
   margin-bottom: 0;
+}
+
+.transactions .price {
+  color: black;
 }
