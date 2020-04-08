@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import { Navbar, Nav } from "react-bootstrap";
 import { LinkContainer } from 'react-router-bootstrap'
 import Session from '../utils/Session';
+import API from '../utils/API';
 // import "../App.css";
 
 const Navibar = ({appProps, history}) => {
@@ -11,6 +12,7 @@ const Navibar = ({appProps, history}) => {
     userHasAuthenticated(false);
     Session.cleanSession();
     history.push("/login");
+    API.defaults.withCredentials = true;
   }
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -21,7 +23,12 @@ const Navibar = ({appProps, history}) => {
       <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
         <Nav>
           { isAuthenticated 
-            ?  <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+            ? <> 
+                <LinkContainer to="summary">
+                  <Nav.Link>Summary</Nav.Link>
+                </LinkContainer>
+                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
+              </>
             : <>
                 <LinkContainer to="signup">
                   <Nav.Link>Sign up</Nav.Link>
