@@ -12,7 +12,6 @@ const CategoriesSelect = ({title, value, onChange}) => {
         const resultData = await loadCategories();
         console.log(resultData.data.categories);
         setCategories([{ id: "", name: "Select the category"}].concat(resultData.data.categories));
-        console.log(resultData.categories);
       } catch (e) {
         console.log(e);
       }
