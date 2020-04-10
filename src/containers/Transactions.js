@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ListGroup, ListGroupItem } from "react-bootstrap";
+import { ListGroup, ListGroupItem, Spinner } from "react-bootstrap";
 import API from "../utils/API"
 import "./Transactions.css";
 import { LinkContainer } from "react-router-bootstrap";
@@ -85,7 +85,11 @@ export default function Home(props) {
       {/* <PageHeader>Your Notes</PageHeader> */}
       <h1>Transactions</h1>
       <ListGroup>
-        {!isLoading && renderTransactionsList(transactions)}
+        {!isLoading ? 
+          renderTransactionsList(transactions) 
+          : 
+          <ListGroupItem className="spinner" key="spinner"><Spinner animation="grow" /></ListGroupItem>
+        }
       </ListGroup>
     </div>
   );
