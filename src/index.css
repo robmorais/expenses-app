@@ -30,3 +30,8 @@ input.form-control {
 input[type=file] {
   width: 100%;
 }
+
+.App h1 {
+  margin: 1rem 0;
+  text-align: center;
+}
