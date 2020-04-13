@@ -68,7 +68,7 @@ export default function NewTransaction(props) {
 
   return (
     <div className="NewTransaction">
-      <h2>New Transaction</h2>
+      <h1>New Transaction</h1>
       <form onSubmit={handleSubmit}>
         <FormGroup controlId="description">
           <Form.Label>Description</Form.Label>
