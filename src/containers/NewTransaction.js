@@ -84,7 +84,6 @@ export default function NewTransaction(props) {
           <Form.Group as={Col} controlId="paidOn">
             <Form.Label>PaidOn</Form.Label>
             <Form.Control
-              autoFocus
               value={fields.paidOn}
               type="date"
               onChange={handleFieldChange}
@@ -94,7 +93,6 @@ export default function NewTransaction(props) {
           <Form.Group as={Col} controlId="price">
             <Form.Label>Price</Form.Label>
             <Form.Control
-            autoFocus
             value={fields.price}
             type="number"
             placeholder="0,0"
