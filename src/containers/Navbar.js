@@ -24,16 +24,16 @@ const Navibar = ({appProps, history}) => {
         <Nav>
           { isAuthenticated 
             ? <> 
-                <LinkContainer to="summary">
+                <LinkContainer to="/summary">
                   <Nav.Link>Summary</Nav.Link>
                 </LinkContainer>
                 <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
               </>
             : <>
-                <LinkContainer to="signup">
+                <LinkContainer to="/signup">
                   <Nav.Link>Sign up</Nav.Link>
                 </LinkContainer>
-                <LinkContainer to="login">
+                <LinkContainer to="/login">
                   <Nav.Link>Login</Nav.Link>
                 </LinkContainer>
               </>
