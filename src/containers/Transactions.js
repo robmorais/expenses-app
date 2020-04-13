@@ -42,14 +42,31 @@ export default function Home(props) {
     return formatter.format(cents/100);
   }
 
-  // const formatDate = ({cents, currency_iso}) => {
-  //   var formatter = new Intl.NumberFormat(undefined, {
-  //     style: 'currency',
-  //     currency: currency_iso,
-  //   });
-    
-  //   return formatter.format(cents/100);
-  // }
+  const startOfWeek = () =>
+  {
+    const _date = new Date((new Date()).setDate(7));
+    _date.setHours(0,0,0,0);
+    return  _date;
+  }
+  
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    date.setHours(0,0,0,0);
+    const today = new Date();
+    const yesterday = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date());
+    if (today.toDateString() === date.toDateString()) {
+      return "today";
+    } else if (yesterday.toDateString() === date.toDateString()) {
+      return "yesterday";
+    } else if (date >= startOfWeek(date)) {
+      const options = { weekday: 'long' };
+      return date.toLocaleDateString("en-US",options);
+    } else {
+      //var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const options = { month: 'long', day: 'numeric' };
+      return date.toLocaleDateString("en-US",options);
+    }
+  }
 
   function renderTransactionsList(transactions) {
     return [{}].concat(transactions).map((transaction, i) =>
@@ -61,9 +78,9 @@ export default function Home(props) {
             <p className="category">{transaction.category.name}</p>
             <p className="description">{transaction.description}</p>
           </div>
-          <div className="details">
+          <div className="details right">
             <p className="price">{formatPrice(transaction.price)}</p>
-            <p className="date">{transaction["paid_on"]}</p>  
+            <p className="date">{formatDate(transaction["paid_on"])}</p>  
           </div>
           
         </ListGroupItem>
@@ -83,7 +100,7 @@ export default function Home(props) {
   return (
     <div className="transactions">
       {/* <PageHeader>Your Notes</PageHeader> */}
-      <h1>Transactions</h1>
+      <h1>{(new Date()).toLocaleString('default', { month: 'long' })}</h1>
       <ListGroup>
         {!isLoading ? 
           renderTransactionsList(transactions) 
@@ -93,9 +110,4 @@ export default function Home(props) {
       </ListGroup>
     </div>
   );
-  // return (
-  //   <div className="Home">
-  //     {props.isAuthenticated ? renderNotes() : renderLander()}
-  //   </div>
-  // );
 }
