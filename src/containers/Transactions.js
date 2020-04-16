@@ -4,13 +4,17 @@ import API from "../utils/API"
 import "./Transactions.css";
 import { LinkContainer } from "react-router-bootstrap";
 
-export default function Home(props) {
+export default function Transaction(props) {
   const [transactions, setTransactions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    let unmounted = false;
     async function onLoad() {
-      if (!props.isAuthenticated) {
+      console.log(props.isAuthenticated);
+      if (props.isAuthenticated === false) {
+        console.log("not auth");
+        props.history.push("/login");
         return;
       }
 
@@ -18,15 +22,21 @@ export default function Home(props) {
         const resultData = await loadTransactions();
         console.log(resultData);
         console.log(resultData.data.transactions);
-        setTransactions(resultData.data.transactions);
+        if (!unmounted) { 
+          setTransactions(resultData.data.transactions);
+          setIsLoading(false);
+        }
       } catch (e) {
         console.log(e);
-      }
-  
-      setIsLoading(false);
+        if (!unmounted) setIsLoading(false);
+      }      
     }
   
     onLoad();
+    return function () {
+      unmounted = true;
+      //source.cancel("Cancelling in cleanup");
+    };
   }, [props.isAuthenticated]);
   
   function loadTransactions() {
